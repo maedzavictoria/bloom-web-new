@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#FFF7FB">
+  <meta name="description" content="BLOOM — your little productivity space for plans, goals, habits, notes and progress.">
+  <title>BLOOM | Your Little Productivity Space</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <a href="#" class="brand" aria-label="BLOOM home">
+        <span class="brand-flower">🌸</span>
+        <span>
+          <strong>BLOOM</strong>
+          <small>your little happy space ♡</small>
+        </span>
+      </a>
+
+      <p class="menu-label">YOUR SPACE</p>
+
+      <nav class="navigation" aria-label="Main navigation">
+        <button class="nav-link active" data-page="dashboard"><span>⌂</span> Dashboard</button>
+        <button class="nav-link" data-page="plans"><span>♡</span> Plans</button>
+        <button class="nav-link" data-page="goals"><span>✧</span> Goals</button>
+        <button class="nav-link" data-page="calendar"><span>▦</span> Calendar</button>
+        <button class="nav-link" data-page="habits"><span>☘</span> Habits</button>
+        <button class="nav-link" data-page="progress"><span>↗</span> Progress</button>
+        <button class="nav-link" data-page="notes"><span>✎</span> Notes</button>
+      </nav>
+
+      <div class="sidebar-bottom">
+        <button class="nav-link" data-page="settings"><span>⚙</span> Settings</button>
+
+        <div class="sidebar-quote">
+          “Little steps every day add up to big changes.” ♡
+        </div>
+
+        <div class="profile">
+          <div class="avatar">V</div>
+          <div>
+            <strong id="profileName">Victoria</strong>
+            <small>Growing every day ✨</small>
+          </div>
+        </div>
+      </div>
+    </aside>
+
+    <main class="main-content">
+      <header class="topbar">
+        <button class="icon-button menu-toggle" id="menuToggle" aria-label="Open menu">☰</button>
+
+        <div class="breadcrumb">
+          My space <span>/</span>
+          <strong id="currentPageName">Dashboard</strong>
+        </div>
+
+        <div class="top-actions">
+          <span class="today-label" id="topDate"></span>
+          <button class="icon-button" id="themeToggle" aria-label="Toggle theme" title="Toggle light/dark theme">☾</button>
+        </div>
+      </header>
+
+      <div class="page-wrap">
+
+        <!-- DASHBOARD -->
+        <section class="page active" id="page-dashboard">
+          <div class="welcome-row">
+            <div>
+              <p class="eyebrow">YOUR LITTLE HAPPY SPACE ♡</p>
+              <h1 id="greeting">Good morning, Victoria 💕</h1>
+              <p class="subtitle">Take a breath. You don't have to do everything at once.</p>
+            </div>
+            <div class="welcome-art">🌷</div>
+          </div>
+
+          <div class="stats-grid">
+            <article class="stat-card">
+              <div class="stat-icon pink-icon">♡</div>
+              <div>
+                <p>Total plans</p>
+                <h2 id="statPlans">0</h2>
+                <small>Things you want to do</small>
+              </div>
+            </article>
+
+            <article class="stat-card">
+              <div class="stat-icon purple-icon">✧</div>
+              <div>
+                <p>Goals in progress</p>
+                <h2 id="statGoals">0</h2>
+                <small>Dreams you're working on</small>
+              </div>
+            </article>
+
+            <article class="stat-card">
+              <div class="stat-icon green-icon">☘</div>
+              <div>
+                <p>Habits completed today</p>
+                <h2 id="statHabits">0</h2>
+                <small>Little wins count</small>
+              </div>
+            </article>
+
+            <article class="stat-card">
+              <div class="stat-icon peach-icon">✓</div>
+              <div>
+                <p>Plans completed</p>
+                <h2 id="statCompleted">0</h2>
+                <small>Look how far you've come</small>
+              </div>
+            </article>
+          </div>
+
+          <div class="content-grid">
+            <article class="panel">
+              <div class="panel-heading">
+                <div>
+                  <h2>Today's plans 🌸</h2>
+                  <p>Your focus for today</p>
+                </div>
+                <button class="text-button" data-go="plans">View all →</button>
+              </div>
+
+              <div id="dashboardPlans" class="item-list"></div>
+              <button class="outline-button full-width" data-add="plan">＋ Add a plan</button>
+            </article>
+
+            <article class="panel">
+              <div class="panel-heading">
+                <div>
+                  <h2>Your goals ✨</h2>
+                  <p>Every small step matters</p>
+                </div>
+                <button class="text-button" data-go="goals">View all →</button>
+              </div>
+
+              <div id="dashboardGoals" class="item-list"></div>
+              <button class="outline-button full-width" data-add="goal">＋ Add a goal</button>
+            </article>
+          </div>
+
+          <article class="panel quote-panel">
+            <span class="quote-flower">🌼</span>
+            <div>
+              <h2>A gentle reminder</h2>
+              <p>You are allowed to grow at your own pace. Progress is progress, even when it is small.</p>
+            </div>
+          </article>
+        </section>
+
+        <!-- PLANS -->
+        <section class="page" id="page-plans">
+          <div class="page-heading">
+            <div>
+              <p class="eyebrow">MAKE SPACE FOR WHAT MATTERS</p>
+              <h1>My Plans ♡</h1>
+              <p class="subtitle">Organise your tasks, one little step at a time.</p>
+            </div>
+            <button class="primary-button" data-add="plan">＋ Add plan</button>
+          </div>
+
+          <div class="filter-row">
+            <input id="planSearch" class="search-input" type="search" placeholder="Search your plans..." aria-label="Search plans">
+            <select id="planFilter" aria-label="Filter plans">
+              <option value="all">All plans</option>
+              <option value="active">Not completed</option>
+              <option value="completed">Completed</option>
+            </select>
+          </div>
+
+          <div id="plansList" class="cards-grid"></div>
+        </section>
+
+        <!-- GOALS -->
+        <section class="page" id="page-goals">
+          <div class="page-heading">
+            <div>
+              <p class="eyebrow">DREAM IT, THEN WORK TOWARDS IT</p>
+              <h1>My Goals ✨</h1>
+              <p class="subtitle">Big dreams are made of small steps.</p>
+            </div>
+            <button class="primary-button" data-add="goal">＋ Add goal</button>
+          </div>
+
+          <div id="goalsList" class="cards-grid"></div>
+        </section>
+
+        <!-- CALENDAR -->
+        <section class="page" id="page-calendar">
+          <div class="page-heading">
+            <div>
+              <p class="eyebrow">A LITTLE PLAN FOR EACH DAY</p>
+              <h1>My Calendar 🌷</h1>
+              <p class="subtitle">See your plans and goals by date.</p>
+            </div>
+            <button class="primary-button" data-add="plan">＋ Add plan</button>
+          </div>
+
+          <article class="panel calendar-panel">
+            <div class="calendar-heading">
+              <button class="icon-button" id="prevMonth" aria-label="Previous month">‹</button>
+              <h2 id="calendarMonth">Month Year</h2>
+              <button class="icon-button" id="nextMonth" aria-label="Next month">›</button>
+              <button class="text-button" id="todayButton">Today</button>
+            </div>
+            <div class="calendar-grid" id="calendarGrid"></div>
+          </article>
+
+          <article class="panel selected-day-panel">
+            <div class="panel-heading">
+              <div>
+                <h2 id="selectedDateTitle">Selected day</h2>
+                <p>Things planned for this date</p>
+              </div>
+              <button class="text-button" id="addPlanForDate">＋ Add plan</button>
+            </div>
+            <div id="selectedDayItems" class="item-list"></div>
+          </article>
+        </section>
+
+        <!-- HABITS -->
+        <section class="page" id="page-habits">
+          <div class="page-heading">
+            <div>
+              <p class="eyebrow">TINY ROUTINES, LOVELY RESULTS</p>
+              <h1>My Habits ☘</h1>
+              <p class="subtitle">Show up for yourself a little each day.</p>
+            </div>
+            <button class="primary-button" data-add="habit">＋ Add habit</button>
+          </div>
+
+          <article class="panel habit-summary">
+            <div class="habit-summary-icon">🌱</div>
+            <div>
+              <p class="eyebrow">TODAY'S LITTLE WINS</p>
+              <h2 id="habitSummaryTitle">You're doing great!</h2>
+              <p id="habitSummaryText" class="subtitle">Every day is a new chance to try again.</p>
+            </div>
+          </article>
+
+          <div id="habitsList" class="cards-grid"></div>
+        </section>
+
+        <!-- PROGRESS -->
+        <section class="page" id="page-progress">
+          <div class="page-heading">
+            <div>
+              <p class="eyebrow">LOOK HOW FAR YOU'VE COME</p>
+              <h1>My Progress 🌟</h1>
+              <p class="subtitle">Celebrate the effort, not just the finish line.</p>
+            </div>
+          </div>
+
+          <div class="stats-grid progress-stats">
+            <article class="stat-card">
+              <div class="stat-icon pink-icon">✓</div>
+              <div>
+                <p>Plans completed</p>
+                <h2 id="progressCompleted">0</h2>
+                <small>Tasks you've finished</small>
+              </div>
+            </article>
+
+            <article class="stat-card">
+              <div class="stat-icon purple-icon">✧</div>
+              <div>
+                <p>Goals reached</p>
+                <h2 id="progressGoalsReached">0</h2>
+                <small>Dreams achieved</small>
+              </div>
+            </article>
+
+            <article class="stat-card">
+              <div class="stat-icon green-icon">☘</div>
+              <div>
+                <p>Habits today</p>
+                <h2 id="progressHabits">0</h2>
+                <small>Today's check-ins</small>
+              </div>
+            </article>
+          </div>
+
+          <article class="panel">
+            <div class="panel-heading">
+              <div>
+                <h2>Goal progress ✨</h2>
+                <p>Your journey, at a glance</p>
+              </div>
+            </div>
+            <div id="goalProgressList" class="progress-list"></div>
+          </article>
+
+          <article class="panel">
+            <div class="panel-heading">
+              <div>
+                <h2>Task completion ♡</h2>
+                <p>How many of your plans are complete?</p>
+              </div>
+            </div>
+            <div id="taskProgress"></div>
+          </article>
+        </section>
+
+        <!-- NOTES -->
+        <section class="page" id="page-notes">
+          <div class="page-heading">
+            <div>
+              <p class="eyebrow">THOUGHTS, IDEAS AND LITTLE REMINDERS</p>
+              <h1>My Notes 📝</h1>
+              <p class="subtitle">A safe little corner for your thoughts in this browser.</p>
+            </div>
+            <button class="primary-button" data-add="note">＋ New note</button>
+          </div>
+
+          <input id="noteSearch" class="search-input notes-search" type="search" placeholder="Search notes..." aria-label="Search notes">
+          <div id="notesList" class="notes-grid"></div>
+        </section>
+
+        <!-- SETTINGS -->
+        <section class="page" id="page-settings">
+          <div class="page-heading">
+            <div>
+              <p class="eyebrow">MAKE BLOOM FEEL LIKE YOURS</p>
+              <h1>Settings ⚙</h1>
+              <p class="subtitle">Your space, your preferences.</p>
+            </div>
+          </div>
+
+          <article class="panel settings-panel">
+            <div class="settings-row">
+              <div class="settings-icon">👩🏽‍💻</div>
+              <div class="settings-copy">
+                <h3>Your name</h3>
+                <p>Personalise your welcome message.</p>
+              </div>
+              <input id="nameSetting" class="settings-input" type="text" maxlength="40" placeholder="Your name">
+              <button class="secondary-button" id="saveName">Save</button>
+            </div>
+
+            <div class="settings-row">
+              <div class="settings-icon">🎨</div>
+              <div class="settings-copy">
+                <h3>Appearance</h3>
+                <p>Choose the look you love.</p>
+              </div>
+              <select id="themeSetting" aria-label="Choose theme">
+                <option value="light">Light pink</option>
+                <option value="dark">Dark mode</option>
+              </select>
+            </div>
+
+            <!-- DEADLINE REMINDERS -->
+            <div class="settings-row" id="deadlineReminderSettings">
+              <div class="settings-icon">🔔</div>
+              <div class="settings-copy">
+                <h3>Deadline reminders</h3>
+                <p id="reminderStatus">
+                  Get notified one day before a deadline and on the due date.
+                </p>
+              </div>
+              <button class="secondary-button" id="enableRemindersBtn" type="button">
+                Enable reminders
+              </button>
+            </div>
+
+            <div class="settings-row">
+              <div class="settings-icon">💾</div>
+              <div class="settings-copy">
+                <h3>Your data</h3>
+                <p>BLOOM saves your information in this browser on this device.</p>
+              </div>
+              <button class="secondary-button" id="exportData">Export backup</button>
+            </div>
+
+            <div class="settings-row danger-row">
+              <div class="settings-icon">🧹</div>
+              <div class="settings-copy">
+                <h3>Reset BLOOM</h3>
+                <p>Delete your saved plans, goals, habits and notes.</p>
+              </div>
+              <button class="danger-button" id="resetData">Reset data</button>
+            </div>
+          </article>
+
+          <p class="settings-footnote">
+            🌸 Remember: browser storage is local to this browser and device.
+            It does not automatically sync to your phone or another computer.
+          </p>
+        </section>
+
+        <footer class="footer">
+          Made with ♡ and a little bit of pink · BLOOM 🌸
+        </footer>
+      </div>
+    </main>
+  </div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+</body>
+</html>
